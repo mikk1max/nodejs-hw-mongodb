@@ -1,7 +1,7 @@
 import pino from 'pino-http';
 
 export const logger = pino({
-  quietReqLogger: true, // turn off the default logging output
+  quietReqLogger: true,
   transport: {
     target: 'pino-pretty',
     options: {
