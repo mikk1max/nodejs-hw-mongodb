@@ -11,6 +11,10 @@ export const getAllContacts = async ({
 }) => {
   const contactsQuery = ContactsCollection.find();
 
+  if (filters.userId) {
+    contactsQuery.where('userId').equals(filters.userId);
+  }
+
   if (filters.type) {
     contactsQuery.where('contactType').equals(filters.type);
   }
