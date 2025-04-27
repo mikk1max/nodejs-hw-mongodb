@@ -37,6 +37,13 @@ export const getContactByIdController = async (req, res) => {
     throw createHttpError(404, `Contact with id ${req.params.id} not found`);
   }
 
+  if (String(contact.userId) !== String(req.user._id)) {
+    throw createHttpError(
+      403,
+      'You do not have permission to access this resource.',
+    );
+  }
+
   res.status(200).json({
     status: 200,
     message: `Successfully found contact with id ${contact.id}!`,
