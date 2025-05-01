@@ -1,7 +1,12 @@
 /node_modules
+package-lock.json
+yarn.lock
 
 .env
 
 .vscode
 .DS_Store
 .idea
+
+**/temp/**
+**/uploads/**
