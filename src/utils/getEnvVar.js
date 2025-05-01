@@ -9,5 +9,5 @@ export const getEnvVar = (name, defaultValue) => {
 
   if (defaultValue) return defaultValue;
 
-  throw new Error(`MissingL process.env['${name}']`);
+  throw new Error(`Missing process.env['${name}']`);
 };

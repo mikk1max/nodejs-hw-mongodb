@@ -6,6 +6,7 @@ import { logger } from './middlewares/pino.js';
 import { errorHandler } from './middlewares/errorHandler.js';
 import router from './routers/index.js';
 import cookieParser from 'cookie-parser';
+import { UPLOAD_DIR } from './constants/index.js';
 
 const PORT = getEnvVar('PORT', '3000');
 
@@ -18,6 +19,7 @@ export const setupServer = () => {
 
   app.use(logger);
 
+  app.use('/upload', express.static(UPLOAD_DIR));
   app.use(router);
 
   app.use('*', notFoundHandler);

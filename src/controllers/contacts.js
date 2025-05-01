@@ -6,10 +6,11 @@ import {
   updateContact,
 } from '../services/contacts.js';
 import createHttpError from 'http-errors';
-import { parsePaginationParams } from '../utils/parsePaginationParams.js';
-import { parseSortParams } from '../utils/parseSortParams.js';
+import { parsePaginationParams } from '../utils/params/parsePaginationParams.js';
+import { parseSortParams } from '../utils/params/parseSortParams.js';
 import { contactsSortFields } from '../db/models/contact.js';
 import { parseContactsFilterParams } from '../utils/filters/parseContactsFilterParams.js';
+import { saveFile } from '../utils/saveFile/saveFile.js';
 
 export const checkUserId = async (req) => {
   const contact = await getContactById(req.params.id);
@@ -66,7 +67,18 @@ export const createContactController = async (req, res) => {
 export const updateContactController = async (req, res) => {
   await checkUserId(req);
 
-  const result = await updateContact(req.params.id, req.body);
+  const photo = req.file;
+
+  let photoUrl;
+
+  if (photo) {
+    photoUrl = await saveFile(photo);
+  }
+
+  const result = await updateContact(req.params.id, {
+    ...req.body,
+    photo: photoUrl,
+  });
 
   if (!result) {
     throw createHttpError(404, 'Contact not found');
