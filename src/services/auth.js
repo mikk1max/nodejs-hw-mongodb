@@ -108,7 +108,7 @@ export const requestResetToken = async (email) => {
   const resetToken = jwt.sign(
     { sub: user._id, email },
     getEnvVar('JWT_SECRET'),
-    { expiresIn: '5m' },
+    { expiresIn: '25m' },
   );
 
   const resetPasswordTemplatePath = path.join(
@@ -167,5 +167,7 @@ export const resetPassword = async (payload) => {
   );
 
   const session = await findSession({ userId: user._id });
-  await SessionCollection.findByIdAndDelete({ _id: session._id });
+  if (session) {
+    await SessionCollection.findByIdAndDelete({ _id: session._id });
+  }
 };
