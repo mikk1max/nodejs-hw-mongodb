@@ -16,6 +16,11 @@ import {
 } from '../constants/index.js';
 import { getEnvVar } from '../utils/getEnvVar.js';
 import { sendEmail } from '../utils/sendEmail.js';
+import {
+  generateAuthUrl,
+  getFullNameFromGoogleTokenPayload,
+  validateCode,
+} from '../utils/googleOAuth2.js';
 
 const createSession = () => {
   const accessToken = randomBytes(30).toString('base64');
@@ -170,4 +175,34 @@ export const resetPassword = async (payload) => {
   if (session) {
     await SessionCollection.findByIdAndDelete({ _id: session._id });
   }
+};
+
+export const getGoogleLink = () => {
+  return generateAuthUrl();
+};
+
+export const loginOrSignupWithGoogle = async (code) => {
+  const loginTicket = await validateCode(code);
+  const payload = loginTicket.getPayload();
+
+  if (!payload) throw createHttpError(401);
+
+  let user = await findUser({ email: payload.email });
+
+  if (!user) {
+    user = await UserCollection.create({
+      name: getFullNameFromGoogleTokenPayload(payload),
+      email: payload.email,
+      password: randomBytes(10).toString('base64'),
+    });
+  }
+
+  await SessionCollection.findOneAndDelete({ userId: user._id });
+
+  const session = createSession();
+
+  return await SessionCollection.create({
+    userId: user._id,
+    ...session,
+  });
 };

@@ -36,6 +36,17 @@ export const getContactsController = async (req, res) => {
     filters,
   });
 
+  console.log('====================================');
+  console.log(contacts);
+  console.log('====================================');
+
+  if (!Array.isArray(contacts.data) || contacts.data.length === 0) {
+    res.status(200).json({
+      status: 200,
+      message: 'No contacts found!',
+      data: contacts,
+    });
+  }
   res.status(200).json({
     status: 200,
     message: 'Successfully found contacts!',
@@ -62,7 +73,6 @@ export const createContactController = async (req, res) => {
   if (photo) {
     photoUrl = await saveFile(photo);
   }
-
 
   const contact = await createContact({ ...req.body, userId, photo: photoUrl });
 

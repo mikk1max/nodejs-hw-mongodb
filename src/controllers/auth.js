@@ -1,4 +1,6 @@
 import {
+  getGoogleLink,
+  loginOrSignupWithGoogle,
   loginUser,
   logoutUser,
   refreshUsersSession,
@@ -82,5 +84,28 @@ export const resetPasswordController = async (req, res) => {
     message: 'Password was successfully reset!',
     status: 200,
     data: {},
+  });
+};
+
+export const getGoogleOAuthUrlController = async (req, res) => {
+  const oauthLink = getGoogleLink();
+
+  res.status(200).json({
+    status: 200,
+    message: 'Successfully get Google OAuth url!',
+    data: { link: oauthLink },
+  });
+};
+
+export const signUpOrLoginWithGoogleController = async (req, res) => {
+  const session = await loginOrSignupWithGoogle(req.body.code);
+  setupSession(res, session);
+
+  res.json({
+    status: 200,
+    message: 'Successfully logged in via Google OAuth!',
+    data: {
+      accessToken: session.accessToken,
+    },
   });
 };
