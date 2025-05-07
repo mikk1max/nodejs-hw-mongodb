@@ -36,10 +36,6 @@ export const getContactsController = async (req, res) => {
     filters,
   });
 
-  console.log('====================================');
-  console.log(contacts);
-  console.log('====================================');
-
   if (!Array.isArray(contacts.data) || contacts.data.length === 0) {
     res.status(200).json({
       status: 200,
