@@ -1,0 +1,15 @@
+description: Not found error
+content:
+  application/json:
+    schema:
+      type: object
+      required:
+        - status
+        - message
+      properties:
+        status:
+          type: integer
+          example: 404
+        message:
+          type: string
+          example: 'Contact with id 6813d429f0182589e0cc3ed5 is not found'

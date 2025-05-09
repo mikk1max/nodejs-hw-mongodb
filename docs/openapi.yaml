@@ -1,16 +1,14 @@
 openapi: 3.1.0
 info:
   version: 1.0.0
-  title: Contacts app
+  title: Contacts Management API
   license:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
-  description: This is a documentation of my contacts app
+  description: "This API provides a robust backend service for managing contact information. It supports CRUD operations on contact data, including creation, retrieval, updating, and deletion. Designed with RESTful principles, this API enables seamless integration with client applications."
 tags:
   - name: Contacts
-    description: Operations about contacts.
-  - name: Auth
-    description: Auth operations.
+    description: Endpoints for managing contacts in the system.
 servers:
   - url: http://localhost:3000
   - url: https://nodejs-hw-mongodb-pwuf.onrender.com

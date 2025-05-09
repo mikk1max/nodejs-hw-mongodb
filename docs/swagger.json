@@ -2,12 +2,12 @@
   "openapi": "3.1.0",
   "info": {
     "version": "1.0.0",
-    "title": "Contacts app",
+    "title": "Contacts Management API",
     "license": {
       "name": "Apache 2.0",
       "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "description": "This is a documentation of my contacts app"
+    "description": "This API provides a robust backend service for managing contact information. It supports CRUD operations on contact data, including creation, retrieval, updating, and deletion. Designed with RESTful principles, this API enables seamless integration with client applications."
   },
   "servers": [
     {
@@ -20,11 +20,7 @@
   "tags": [
     {
       "name": "Contacts",
-      "description": "Operations about contacts."
-    },
-    {
-      "name": "Auth",
-      "description": "Auth operations."
+      "description": "Endpoints for managing contacts in the system."
     }
   ],
   "paths": {
@@ -312,8 +308,14 @@
               }
             }
           },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
           "401": {
             "$ref": "#/components/responses/401"
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
           }
         }
       },
@@ -386,7 +388,7 @@
           }
         },
         "responses": {
-          "201": {
+          "200": {
             "description": "Edit a contact",
             "content": {
               "application/json": {
@@ -400,7 +402,7 @@
                   "properties": {
                     "status": {
                       "type": "integer",
-                      "example": 201
+                      "example": 200
                     },
                     "message": {
                       "type": "string",
@@ -415,8 +417,14 @@
               }
             }
           },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
           "401": {
             "$ref": "#/components/responses/401"
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
           }
         }
       },
@@ -444,11 +452,17 @@
           }
         ],
         "responses": {
-          "200": {
+          "204": {
             "description": "Delete contact by id"
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
           },
           "401": {
             "$ref": "#/components/responses/401"
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
           }
         }
       }
@@ -458,7 +472,8 @@
     "securitySchemes": {
       "bearerAuth": {
         "type": "http",
-        "scheme": "bearer"
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
       }
     },
     "schemas": {
@@ -515,11 +530,45 @@
             "description": "Link to contact's photo",
             "type": "string",
             "example": "https://res.cloudinary.com/uqwgdu/image/upload/image.png"
+          },
+          "createdAt": {
+            "description": "The timestamp indicating when the contact was initially created",
+            "type": "string",
+            "example": "2025-05-01T20:06:09.058Z"
+          },
+          "updatedAt": {
+            "description": "The timestamp indicating the most recent update to the contact",
+            "type": "string",
+            "example": "2025-05-01T20:06:09.058Z"
           }
         }
       }
     },
     "responses": {
+      "400": {
+        "description": "Bad request error",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "required": [
+                "status",
+                "message"
+              ],
+              "properties": {
+                "status": {
+                  "type": "integer",
+                  "example": 400
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Contact with id 6813d429f0182589e0cc3ed is not found"
+                }
+              }
+            }
+          }
+        }
+      },
       "401": {
         "description": "Unauthorized error",
         "content": {
@@ -538,6 +587,30 @@
                 "message": {
                   "type": "string",
                   "example": "Please provide Authorization header"
+                }
+              }
+            }
+          }
+        }
+      },
+      "404": {
+        "description": "Not found error",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "required": [
+                "status",
+                "message"
+              ],
+              "properties": {
+                "status": {
+                  "type": "integer",
+                  "example": 404
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Contact with id 6813d429f0182589e0cc3ed5 is not found"
                 }
               }
             }

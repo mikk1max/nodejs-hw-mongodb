@@ -27,7 +27,7 @@ properties:
     type: string
     example: 'd.melnyk@example.com'
   isFavourite:
-    description: 'Is contact favourite'
+    description: "Is contact favourite"
     type: boolean
     example: false
   userId:
@@ -38,3 +38,11 @@ properties:
     description: "Link to contact's photo"
     type: string
     example: https://res.cloudinary.com/uqwgdu/image/upload/image.png
+  createdAt:
+    description: "The timestamp indicating when the contact was initially created"
+    type: string
+    example: "2025-05-01T20:06:09.058Z"
+  updatedAt:
+    description: "The timestamp indicating the most recent update to the contact"
+    type: string
+    example: "2025-05-01T20:06:09.058Z"
