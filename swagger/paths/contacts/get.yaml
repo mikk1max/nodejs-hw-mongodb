@@ -4,7 +4,7 @@ summary: Get list of contacts
 operationId: getContacts
 description: 'Get list of contacts with this endpoint'
 security:
-  - bearerAuth: []
+  - bearerAuth: [ ]
 parameters:
   - in: query
     name: page
@@ -21,13 +21,13 @@ parameters:
     schema:
       type: string
       example: 'contactType'
-      enum: ['name', 'phoneNumber', 'contactType']
+      enum: [ 'name', 'phoneNumber', 'contactType' ]
     description: 'Default value - _id'
   - in: query
     name: sortOrder
     schema:
       type: string
-      enum: ['asc', 'desc']
+      enum: [ 'asc', 'desc' ]
       example: 'asc'
 responses:
   '200':

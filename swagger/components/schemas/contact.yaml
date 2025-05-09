@@ -5,7 +5,6 @@ required:
   - phoneNumber
   - contactType
   - userId
-
 properties:
   _id:
     description: "Contact's id"
@@ -22,7 +21,7 @@ properties:
   contactType:
     description: "Contact's type"
     type: string
-    enum: ['personal', 'home', 'work']
+    enum: [ 'personal', 'home', 'work' ]
   email:
     description: "Contact's email"
     type: string

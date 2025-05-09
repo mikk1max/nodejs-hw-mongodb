@@ -4,7 +4,7 @@ summary: Get contact by id
 operationId: getContact
 description: 'Get contact by id'
 security:
-  - bearerAuth: []
+  - bearerAuth: [ ]
 parameters:
   - in: path
     name: id
@@ -32,6 +32,6 @@ responses:
               example: Successfully found contact with id 681381cf82909614cd598f3e!
             data:
               type: object
-              $ref: ../../../components/schemas/contact.yaml
+              $ref: "../../../components/schemas/contact.yaml"
   '401':
     $ref: '../../../components/responses/401.yaml'

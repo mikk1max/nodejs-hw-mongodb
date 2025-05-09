@@ -1,19 +1,22 @@
 tags:
   - Contacts
-summary: Create contact
-operationId: createContact
-description: 'Create a contact with payload'
+summary: Edit contact
+operationId: patchContact
+description: 'Edit a contact with payload'
 security:
   - bearerAuth: [ ]
+parameters:
+  - in: path
+    name: id
+    required: true
+    schema:
+      type: string
+      example: '681381cf82909614cd598f3e'
 requestBody:
   content:
     multipart/form-data:
       schema:
         type: object
-        required:
-          - name
-          - phoneNumber
-          - contactType
         properties:
           name:
             description: "Contact's name"
@@ -41,7 +44,7 @@ requestBody:
             format: binary
 responses:
   '201':
-    description: Creates a contact
+    description: Edit a contact
     content:
       application/json:
         schema:
@@ -56,9 +59,9 @@ responses:
               example: 201
             message:
               type: string
-              example: Successfully created a contact!
+              example: Successfully patched a contact!
             data:
               type: object
-              $ref: ../../components/schemas/contact.yaml
+              $ref: "../../../components/schemas/contact.yaml"
   '401':
-    $ref: '../../components/responses/401.yaml'
+    $ref: '../../../components/responses/401.yaml'

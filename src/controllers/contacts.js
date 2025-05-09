@@ -1,10 +1,4 @@
-import {
-  createContact,
-  deleteContact,
-  getAllContacts,
-  getContactById,
-  updateContact,
-} from '../services/contacts.js';
+import { createContact, deleteContact, getAllContacts, getContactById, updateContact } from '../services/contacts.js';
 import createHttpError from 'http-errors';
 import { parsePaginationParams } from '../utils/params/parsePaginationParams.js';
 import { parseSortParams } from '../utils/params/parseSortParams.js';
@@ -101,7 +95,7 @@ export const updateContactController = async (req, res) => {
 
   res.status(200).json({
     status: 200,
-    message: 'Successfully patched a student!',
+    message: 'Successfully patched a contact!',
     data: result,
   });
 };

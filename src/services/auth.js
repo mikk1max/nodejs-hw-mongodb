@@ -8,19 +8,10 @@ import createHttpError from 'http-errors';
 
 import { UserCollection } from '../db/models/user.js';
 import { SessionCollection } from '../db/models/session.js';
-import {
-  FIFTEEN_MINUTES,
-  ONE_DAY,
-  SMTP,
-  TEMPLATES_DIR,
-} from '../constants/index.js';
+import { FIFTEEN_MINUTES, ONE_DAY, SMTP, TEMPLATES_DIR } from '../constants/index.js';
 import { getEnvVar } from '../utils/getEnvVar.js';
 import { sendEmail } from '../utils/sendEmail.js';
-import {
-  generateAuthUrl,
-  getFullNameFromGoogleTokenPayload,
-  validateCode,
-} from '../utils/googleOAuth2.js';
+import { generateAuthUrl, getFullNameFromGoogleTokenPayload, validateCode } from '../utils/googleOAuth2.js';
 
 const createSession = () => {
   const accessToken = randomBytes(30).toString('base64');

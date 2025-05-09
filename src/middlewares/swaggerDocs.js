@@ -10,7 +10,7 @@ export const swaggerDocs = () => {
   } catch {
     return (req, res) => {
       res.status(500).json({
-        message: "Can't load swagger docs",
+        message: 'Can\'t load swagger docs',
       });
     };
   }
