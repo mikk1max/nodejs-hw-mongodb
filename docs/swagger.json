@@ -248,6 +248,9 @@
               }
             }
           },
+          "400": {
+            "$ref": "#/components/responses/400-post"
+          },
           "401": {
             "$ref": "#/components/responses/401"
           }
@@ -309,7 +312,7 @@
             }
           },
           "400": {
-            "$ref": "#/components/responses/400"
+            "$ref": "#/components/responses/400-no-body"
           },
           "401": {
             "$ref": "#/components/responses/401"
@@ -373,7 +376,7 @@
                     "example": "d.melnyk@example.com"
                   },
                   "isFavourite": {
-                    "description": "Is student favourite",
+                    "description": "Is contact favourite",
                     "type": "boolean",
                     "example": false
                   },
@@ -456,7 +459,7 @@
             "description": "Delete contact by id"
           },
           "400": {
-            "$ref": "#/components/responses/400"
+            "$ref": "#/components/responses/400-no-body"
           },
           "401": {
             "$ref": "#/components/responses/401"
@@ -472,8 +475,7 @@
     "securitySchemes": {
       "bearerAuth": {
         "type": "http",
-        "scheme": "bearer",
-        "bearerFormat": "JWT"
+        "scheme": "bearer"
       }
     },
     "schemas": {
@@ -561,8 +563,30 @@
                   "example": 400
                 },
                 "message": {
-                  "type": "string",
-                  "example": "Contact with id 6813d429f0182589e0cc3ed is not found"
+                  "type": "string"
+                }
+              }
+            },
+            "examples": {
+              "invalidIsFavourite": {
+                "summary": "Invalid isFavourite format",
+                "value": {
+                  "status": 400,
+                  "message": "Validation failed: \\\"isFavourite\\\" must be a boolean"
+                }
+              },
+              "invalidContactType": {
+                "summary": "Invalid contact type",
+                "value": {
+                  "status": 400,
+                  "message": "Validation failed: \\\"contactType\\\" must be one of [personal, home, work]"
+                }
+              },
+              "invalidId": {
+                "summary": "Invalid id format",
+                "value": {
+                  "status": 400,
+                  "message": "Contact with id 6813d429f0182589e0cc3ed is not found"
                 }
               }
             }
@@ -611,6 +635,69 @@
                 "message": {
                   "type": "string",
                   "example": "Contact with id 6813d429f0182589e0cc3ed5 is not found"
+                }
+              }
+            }
+          }
+        }
+      },
+      "400-post": {
+        "description": "Bad request error",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "required": [
+                "status",
+                "message"
+              ],
+              "properties": {
+                "status": {
+                  "type": "integer",
+                  "example": 400
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            },
+            "examples": {
+              "invalidIsFavourite": {
+                "summary": "Invalid isFavourite format",
+                "value": {
+                  "status": 400,
+                  "message": "Validation failed: \\\"isFavourite\\\" must be a boolean"
+                }
+              },
+              "invalidContactType": {
+                "summary": "Invalid contact type",
+                "value": {
+                  "status": 400,
+                  "message": "Validation failed: \\\"contactType\\\" must be one of [personal, home, work]"
+                }
+              }
+            }
+          }
+        }
+      },
+      "400-no-body": {
+        "description": "Bad request error",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "required": [
+                "status",
+                "message"
+              ],
+              "properties": {
+                "status": {
+                  "type": "integer",
+                  "example": 400
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Contact with id 6813d429f0182589e0cc3ed is not found"
                 }
               }
             }

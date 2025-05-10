@@ -35,7 +35,7 @@ requestBody:
             type: string
             example: 'd.melnyk@example.com'
           isFavourite:
-            description: 'Is student favourite'
+            description: 'Is contact favourite'
             type: boolean
             example: false
           photo:
@@ -64,7 +64,7 @@ responses:
               type: object
               $ref: "../../../components/schemas/contact.yaml"
   '400':
-    $ref: '../../../components/responses/400.yaml'
+    $ref: '../../../components/responses/400/400.yaml'
   '401':
     $ref: '../../../components/responses/401.yaml'
   '404':

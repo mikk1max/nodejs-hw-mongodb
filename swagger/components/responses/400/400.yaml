@@ -1,0 +1,30 @@
+description: Bad request error
+content:
+  application/json:
+    schema:
+      type: object
+      required:
+        - status
+        - message
+      properties:
+        status:
+          type: integer
+          example: 400
+        message:
+          type: string
+    examples:
+      invalidIsFavourite:
+        summary: Invalid isFavourite format
+        value:
+          status: 400
+          message: 'Validation failed: \"isFavourite\" must be a boolean'
+      invalidContactType:
+        summary: Invalid contact type
+        value:
+          status: 400
+          message: 'Validation failed: \"contactType\" must be one of [personal, home, work]'
+      invalidId:
+        summary: Invalid id format
+        value:
+          status: 400
+          message: 'Contact with id 6813d429f0182589e0cc3ed is not found'
